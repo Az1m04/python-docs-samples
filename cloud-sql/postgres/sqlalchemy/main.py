@@ -26,15 +26,18 @@ logger = logging.getLogger()
 
 
 def init_connection_engine():
+    # [START cloud_sql_postgres_sqlalchemy_limit]
     db_config = {
-        # [START cloud_sql_postgres_sqlalchemy_limit]
+    # [END cloud_sql_postgres_sqlalchemy_limit]
+
+    # [START cloud_sql_postgres_sqlalchemy_limit]
         # Pool size is the maximum number of permanent connections to keep.
         "pool_size": 5,
         # Temporarily exceeds the set pool_size if no connections are available.
         "max_overflow": 2,
         # The total number of concurrent connections for your application will be
         # a total of pool_size and max_overflow.
-        # [END cloud_sql_postgres_sqlalchemy_limit]
+    # [END cloud_sql_postgres_sqlalchemy_limit]
 
         # [START cloud_sql_postgres_sqlalchemy_backoff]
         # SQLAlchemy automatically uses delays between failed connection attempts,
@@ -54,7 +57,9 @@ def init_connection_engine():
         # reestablished
         "pool_recycle": 1800,  # 30 minutes
         # [END cloud_sql_postgres_sqlalchemy_lifetime]
+    # [START cloud_sql_postgres_sqlalchemy_limit]
     }
+    # [END cloud_sql_postgres_sqlalchemy_limit]
 
     if os.environ.get("DB_HOST"):
         return init_tcp_connection_engine(db_config)
